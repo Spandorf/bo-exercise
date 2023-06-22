@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id                   Int       @id @default(autoincrement())
+  title                String
+  budget               Int
+  genres               Genre[]
+  homepage             String?
+  original_language    String
+  original_title       String
+  overview             String
+  popularity           Decimal
+  production_companies Company[]
+  release_date         String?
+  revenue              BigInt
+  runtime              Int
+  status               String
+  tagline              String
+  vote_average         Decimal
+  vote_count           Int
+  createdAt            DateTime  @default(now())
+}
+
+model Credit {
+  id        Int          @id @default(autoincrement())
+  movie_id  Int
+  title     String
+  cast      CastMember[]
+  crew      CrewMember[]
+  createdAt DateTime     @default(now())
+}
+
+model Genre {
+  id        Int      @id @default(autoincrement())
+  genre_id  Int
+  name      String
+  createdAt DateTime @default(now())
+  Movie     Movie?   @relation(fields: [movieId], references: [id])
+  movieId   Int?
+}
+
+model Company {
+  id         Int      @id @default(autoincrement())
+  company_id Int
+  name       String
+  createdAt  DateTime @default(now())
+  Movie      Movie?   @relation(fields: [movieId], references: [id])
+  movieId    Int?
+}
+
+model CastMember {
+  id        Int      @id @default(autoincrement())
+  cast_id   Int
+  name      String
+  character String
+  credit_id String
+  gender    Int
+  order     Int
+  createdAt DateTime @default(now())
+  Credit    Credit?  @relation(fields: [creditId], references: [id])
+  creditId  Int?
+}
+
+model CrewMember {
+  id         Int      @id @default(autoincrement())
+  cast_id    Int
+  name       String
+  department String
+  credit_id  String
+  gender     Int
+  job        String
+  createdAt  DateTime @default(now())
+  Credit     Credit?  @relation(fields: [creditId], references: [id])
+  creditId   Int?
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
