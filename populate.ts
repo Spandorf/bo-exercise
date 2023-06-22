@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import * as csv from 'fast-csv';
-import { Decimal } from '@prisma/client/runtime';
 
 const prisma = new PrismaClient()
 interface Movie {

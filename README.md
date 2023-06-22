@@ -16,11 +16,12 @@ My code for challenge A.
 
 * First time working with prisma.io, great tool but may have taken up a bit more of the time limit than expected
 * Did not populate credits/cast due to time limit
+* Used DBeaver to query the data and generate the screenshots, wasnt famliar enough with prisma's query syntax to get the exact results needed
 
 ## Potential Improvement
 
 * Batched writes of data instead of sequential
-* Did not populate credits/cast due to time limit
+* Sqlite handles dates in clunky manner, postgres is better for that
 
 ## Build and run the project
 
